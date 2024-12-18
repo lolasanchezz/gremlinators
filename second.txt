@@ -50,10 +50,8 @@ public class second extends LinearOpMode {
     arm.setDirection(DcMotor.Direction.REVERSE);
     waitForStart();
     if (opModeIsActive()) {
-      left_drive.setPower(-gamepad2.left_stick_y);
-        right_drive.setPower(-gamepad2.right_stick_y);
-        arm.setPower(gamepad1.right_bumper? 1.00 : 0.00);
-       // arm.setPower(gamepad1.left_bumper? -1.00 : 0.00);
+     
+      
       // Put run blocks here.
       while (opModeIsActive()) {
         // Put loop blocks here.
@@ -73,6 +71,20 @@ public class second extends LinearOpMode {
         // move to 180 degrees.
         wheel_servo.setPosition(1);
         //telemetry.addData("a pressed");
+    } else if (gamepad1.right_trigger == 1){
+      
+      rotate_servo.setPosition(1);
+      
+    } else if (gamepad1.left_trigger == 1){
+      
+      rotate_servo.setPosition(-1);
+      
+    } else {
+        left_drive.setPower(-gamepad1.left_stick_y);
+        right_drive.setPower(-gamepad1.right_stick_y);
+        arm.setPower(gamepad1.right_bumper? 1.00 : 0.00);
+        arm.setPower(gamepad1.left_bumper? -1.00 : 0.00);
+      
     }
       /*if(gamepad1.a) {
         // move to 0 degrees.
