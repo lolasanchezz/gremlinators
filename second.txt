@@ -51,7 +51,7 @@ public class second extends LinearOpMode {
     waitForStart();
     if (opModeIsActive()) {
      
-      
+      System.out.print
       // Put run blocks here.
       while (opModeIsActive()) {
         // Put loop blocks here.
@@ -71,11 +71,11 @@ public class second extends LinearOpMode {
         // move to 180 degrees.
         wheel_servo.setPosition(1);
         //telemetry.addData("a pressed");
-    } else if (gamepad1.right_trigger == 1){
+    } else if (gamepad1.right_trigger == 1.00){
       
       rotate_servo.setPosition(1);
       
-    } else if (gamepad1.left_trigger == 1){
+    } else if (gamepad1.left_trigger == 1.00){
       
       rotate_servo.setPosition(-1);
       
