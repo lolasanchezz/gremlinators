@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -27,7 +29,7 @@ public class second extends LinearOpMode {
   private DcMotor left_drive;
   private DcMotor arm;
   private Servo wheel_servo;
-  private Servo rotate_servo;
+  private CRServo rotate_servo;
 
   /**
    * This OpMode offers Tank Drive style TeleOp control for a direct drive robot.
@@ -41,7 +43,7 @@ public class second extends LinearOpMode {
     left_drive = hardwareMap.get(DcMotor.class, "left_drive");
     arm = hardwareMap.get(DcMotor.class, "arm");
     wheel_servo = hardwareMap.get(Servo.class, "wheel_servo");
-    rotate_servo = hardwareMap.get(Servo.class, "rotate_servo");
+    rotate_servo = hardwareMap.get(CRServo.class, "rotate_servo");
     // Reverse one of the drive motors.
     // You will have to determine which motor to reverse for your robot.
     // In this example, the right motor was reversed so that positive
@@ -51,9 +53,11 @@ public class second extends LinearOpMode {
     waitForStart();
     if (opModeIsActive()) {
      
-      System.out.print
+      System.out.println(gamepad1.right_trigger);
+      
       // Put run blocks here.
       while (opModeIsActive()) {
+        
         // Put loop blocks here.
         // The Y axis of a joystick ranges from -1 in its topmost position to +1 in its bottommost position.
         // We negate this value so that the topmost position corresponds to maximum forward power.
@@ -62,23 +66,17 @@ public class second extends LinearOpMode {
       if(gamepad1.y) {
         // move to 0 degrees.
         wheel_servo.setPosition(0);
+        
         //telemetry.addData("y pressed", gamepad1);
-    } else if (gamepad1.x || gamepad2.b) {
+    } else if (gamepad1.x || gamepad1.b) {
         // move to 90 degrees.
         wheel_servo.setPosition(0.5);
         //telemetry.addData("x or b pressed");
     } else if (gamepad1.a) {
         // move to 180 degrees.
         wheel_servo.setPosition(1);
+        
         //telemetry.addData("a pressed");
-    } else if (gamepad1.right_trigger == 1.00){
-      
-      rotate_servo.setPosition(1);
-      
-    } else if (gamepad1.left_trigger == 1.00){
-      
-      rotate_servo.setPosition(-1);
-      
     } else {
         left_drive.setPower(-gamepad1.left_stick_y);
         right_drive.setPower(-gamepad1.right_stick_y);
@@ -86,6 +84,17 @@ public class second extends LinearOpMode {
         arm.setPower(gamepad1.left_bumper? -1.00 : 0.00);
       
     }
+    while (gamepad1.dpad_up){
+      
+     rotate_servo.setPosition(1);
+      
+    } 
+    while (gamepad1.dpad_down){
+      
+      rotate_servo.setPosition(0);
+      //rotate_servo.setDirection(DcMotorSimple.Direction.REVERSE);
+     
+    } 
       /*if(gamepad1.a) {
         // move to 0 degrees.
         wheel_servo.setPosition(0);
@@ -104,9 +113,11 @@ public class second extends LinearOpMode {
         telemetry.addData("Left Pow", left_drive.getPower());
         telemetry.addData("Right Pow", right_drive.getPower());
         telemetry.addData("wheel position", wheel_servo.getPosition());
-        telemetry.addData("rotate servo position", rotate_servo.getPosition());
+        telemetry.addData("rotate servo position", rotate_servo.getPower());
         telemetry.addData("arm", arm.getPower());
+        telemetry.addData("um", gamepad1.right_trigger);
         telemetry.update();
+        
         
       }
     }
