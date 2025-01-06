@@ -29,8 +29,9 @@ public class second extends LinearOpMode {
   private DcMotor left_drive;
   private DcMotor arm;
   private Servo wheel_servo;
-  private CRServo rotate_servo;
+  private Servo rotate_servo;
   public float wheel_servo_pos;
+  public float rotate_servo_pos;
   
   /**
    * This OpMode offers Tank Drive style TeleOp control for a direct drive robot.
@@ -41,11 +42,12 @@ public class second extends LinearOpMode {
   @Override
   public void runOpMode() {
     wheel_servo_pos = 0.5f;
+    rotate_servo_pos = 0.5f;
     right_drive = hardwareMap.get(DcMotor.class, "right_drive");
     left_drive = hardwareMap.get(DcMotor.class, "left_drive");
     arm = hardwareMap.get(DcMotor.class, "arm");
     wheel_servo = hardwareMap.get(Servo.class, "wheel_servo");
-    rotate_servo = hardwareMap.get(CRServo.class, "rotate_servo");
+    rotate_servo = hardwareMap.get(Servo.class, "rotate_servo");
     // Reverse one of the drive motors.
     // You will have to determine which motor to reverse for your robot.
     // In this example, the right motor was reversed so that positive
@@ -70,14 +72,22 @@ public class second extends LinearOpMode {
        // servos position will always be set to the same variable, which should
        // update when x/y is clicked
         wheel_servo.setPosition(wheel_servo_pos);
-        
-      if(gamepad1.x) {
-        wheel_servo_pos = wheel_servo_pos + 0.001f;
+        rotate_servo.setPosition(rotate_servo_pos);
+      if(gamepad1.y) {
+        wheel_servo_pos = wheel_servo_pos + 0.0001f;
+        telemetry.addData("y: ", wheel_servo_pos);
         } 
-      if (gamepad1.b) {
-        wheel_servo_pos = wheel_servo_pos - 0.001f;
+      if (gamepad1.a) {
+        wheel_servo_pos = wheel_servo_pos - 0.0001f;
+        telemetry.addData("a: ", wheel_servo_pos);
       }
-      
+      if (gamepad1.x){
+        rotate_servo_pos = rotate_servo_pos + 0.001f;
+        
+      }
+      if (gamepad1.b) {
+        rotate_servo_pos = rotate_servo_pos - 0.001f;
+      }
    
    
    
