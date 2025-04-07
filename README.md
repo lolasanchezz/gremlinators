@@ -1,4 +1,1 @@
 # gremlinators
-
-
-# LET ME KNOWWWWWWW LET ME KNOWWW DO YOU LOVE THE WAY I DO
