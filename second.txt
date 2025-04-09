@@ -19,6 +19,7 @@ private void initTfod() {
 
 } 
 
+it might be crazy what im bout to say
 */
 
 @TeleOp(name = "ONLY USE THIS MODE")
